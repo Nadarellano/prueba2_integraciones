@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: API REST  Servicios MusicPro
+  description: Documentación MusicPro utilizando openapi 3.0.3
+  contact:
+    email: prueba2_integracion@duoc.cl
+  license:
+    name: Apache 2.0
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api_venta/v1
+
+tags:
+  - name: venta
+    description: Servicio de ventas del producto
+
+paths:
+  /venta:
+    post:
+      tags:
+        - venta
+      summary: Método para registrar una venta.
+      description: Método para registrar una venta.
+      operationId: createVenta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venta'
+      responses:
+        '201': 
+          description: venta registrada.
+        '400':
+          description: Formato venta invalida.
+        '500': 
+          description: Error de servicio
+
+
+components:
+  schemas:
+    Venta:
+      type: object
+      properties:
+        id_venta:
+          type: integer
+          format: int64
+          example: 100232
+        id_prod:
+          type: integer
+          format: int64
+          example: 123456
+        fecha:
+          type: string
+          example: 13-05-2023
+        neto:
+          type: integer
+          format: int64
+          example: 145423
+        iva:
+          type: integer
+          format: int64
+          example: 27630
+        id_cliente: 
+          type: integer
+          format: int64
+          example: 173053
+        total_venta:
+          type: integer
+          format: int64
+          example: 5423
+
+
+
+
+    
+
+
+    

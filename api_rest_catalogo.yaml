@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: API REST  Servicios MusicPro
+  description: Documentación MusicPro utilizando openapi 3.0.3
+  contact:
+    email: prueba2_integracion@duoc.cl
+  license:
+    name: Apache 2.0
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api_catalogo/v1
+
+tags:
+  - name: catalogo
+    description: Servicio de producto del catálogo
+
+paths:
+  /catalogo:
+    post:
+      tags:
+        - catalogo
+      summary: Método para crear un producto.
+      description: Método para crear un producto.
+      operationId: createProducto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalogo'
+      responses:
+        '201': 
+          description: Producto creada.
+        '400':
+          description: Formato Producto invalido.
+        '500': 
+          description: Error de servicio.
+
+    put:
+      tags:
+        - catalogo
+      summary: Método para actualizar un producto.
+      description: Método para actualizar un producto.
+      operationId: updateProducto 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalogo'
+      responses:
+        '200': 
+          description: Producto actualizado.
+        '400':
+          description: Formato Producto invalido.
+        '404':
+          description: Producto no encontrado.
+        '500': 
+          description: Error de servicio.
+
+    get:
+      tags:
+        - catalogo
+      summary: Método para buscar todas los productos.
+      description: Método para buscar todas las productos.
+      operationId: findAll
+      responses:
+        '200':
+          description: datos encontrados.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogo'
+        '404':
+          description: No existen productos.
+
+  /catalogo/{id}:
+    get:
+      tags:
+        - catalogo
+      summary: Médodo para buscar un producto por id.
+      description: Médodo para buscar un producto por id.
+      operationId: findById
+      parameters:
+      - name: id
+        in: path
+        description: Identificador de un producto.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Producto encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalogo'
+        '404':
+          description: Producto no encontrado.
+        
+        '500': 
+          description: Error de servicio.
+
+    delete:
+      tags:
+        - catalogo
+      summary: Método para borrar un producto por id.
+      description: Método para borrar un producto por id.
+      operationId: deleteById      
+      parameters:
+      - name: id
+        in: path
+        description: Identificador de una producto.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Producto eliminado del Sistema.
+        '404':
+          description: Producto no encontrado.
+        '500': 
+          description: Error de servicio.
+
+components:
+  schemas:
+    Catalogo:
+      type: object
+      properties:
+        id_prod:
+          type: integer
+          format: int64
+          example: 123456
+        nombre:
+          type: string
+          example: Guitarra
+        descripcion:
+          type: string
+          example: Guitarra acústica
+        precio:
+          type: integer
+          format: int64
+          example: 69990
+
+   
+
+    
+
+
+    

@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: API REST  Servicios MusicPro
+  description: Documentación MusicPro utilizando openapi 3.0.3
+  contact:
+    email: prueba2_integracion@duoc.cl
+  license:
+    name: Apache 2.0
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api_stock/v1
+
+tags:
+  - name: stock
+    description: Servicio de stock del producto
+
+
+paths:
+  /stock:
+    get:
+      tags:
+        - stock
+      summary: Método para buscar todas los productos.
+      description: Método para buscar todas las productos.
+      operationId: findAlls
+      responses:
+        '200':
+          description: datos encontrados.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
+        '404':
+          description: No existen productos.
+        '500': 
+          description: Error de servicio.
+
+  /stock/{id}:
+    get:
+      tags:
+        - stock
+      summary: Médodo para buscar un producto por id.
+      description: Médodo para buscar un producto por id.
+      operationId: findByIds
+      parameters:
+      - name: id
+        in: path
+        description: Identificador de un producto.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Producto encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stock'
+        '404':
+          description: Producto no encontrado.
+        '500': 
+          description: Error de servicio
+        
+
+  
+components:
+  schemas:
+    Stock:
+      type: object
+      properties:
+        id_prod:
+          type: integer
+          format: int64
+          example: 123456
+        nombre:
+          type: string
+          example: Guitarra
+        cantidad:
+          type: integer
+          format: int64
+          example: 12
+
+
+    
+
+
+    
