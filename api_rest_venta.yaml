@@ -63,11 +63,11 @@ components:
         id_cliente: 
           type: integer
           format: int64
-          example: 173053
+          example: 23
         total_venta:
           type: integer
           format: int64
-          example: 5423
+          example: 173053
 
 
 
